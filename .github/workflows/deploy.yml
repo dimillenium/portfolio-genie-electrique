@@ -1,0 +1,53 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      publier_quand_meme:
+        description: "Publier même s'il reste des [PLACEHOLDERS]"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.placeholders.outputs.ready }}
+    steps:
+      - name: Récupère le code
+        uses: actions/checkout@v7
+
+      # Liste les [PLACEHOLDERS] restants (annotations + résumé du job)
+      - name: Vérifie les placeholders
+        id: placeholders
+        run: node scripts/check-placeholders.mjs --github
+
+      # npm ci, astro check (schéma zod, règle « termine » ⇒ repoUrl), astro build
+      - name: Installe, vérifie et construit le site
+        uses: withastro/action@v6
+        with:
+          node-version: 26
+
+  deploy:
+    needs: build
+    # Rien n'est publié tant qu'il reste des placeholders (sauf lancement manuel forcé)
+    if: needs.build.outputs.ready == 'true' || inputs.publier_quand_meme
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déploie sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

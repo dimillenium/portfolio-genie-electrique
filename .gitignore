@@ -21,3 +21,6 @@ Thumbs.db
 
 # rapports locaux
 .lighthouse/
+
+# configuration locale Claude Code
+.claude/

@@ -5,7 +5,7 @@
 //   npm run placeholders -- --strict → code de sortie 1 s'il en reste (avant publication)
 //   node scripts/check-placeholders.mjs --github → annotations GitHub Actions
 
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { appendFileSync, existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PLACEHOLDER_SOURCE } from '../src/lib/placeholders.mjs';
@@ -67,6 +67,19 @@ for (const file of walk(contentDir)) {
 }
 
 const cvPresent = existsSync(join(root, 'public', 'cv', 'cv.pdf'));
+
+// GitHub Actions : sortie « ready » (aucun placeholder) et résumé du job
+if (github && process.env.GITHUB_OUTPUT) {
+  appendFileSync(process.env.GITHUB_OUTPUT, `ready=${found.length === 0}\ncount=${found.length}\n`);
+}
+if (github && process.env.GITHUB_STEP_SUMMARY) {
+  const rows = found.map(({ file, line, text }) => `| \`${file}:${line}\` | ${text.replace(/\|/g, '\\|')} |`);
+  const summary =
+    found.length === 0
+      ? '### Placeholders\n\nAucun placeholder restant.\n'
+      : `### ${found.length} placeholder(s) à remplir\n\n| Fichier | Placeholder |\n|---|---|\n${rows.join('\n')}\n`;
+  appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + (cvPresent ? '' : '\n`public/cv/cv.pdf` absent : lien CV désactivé.\n'));
+}
 
 if (found.length === 0 && cvPresent) {
   console.log('Aucun placeholder restant. ✔');
