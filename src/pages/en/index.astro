@@ -1,0 +1,8 @@
+---
+import ComingSoon from '../../components/ComingSoon.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<ComingSoon route="home" pageTitle={t('nav.home')} />

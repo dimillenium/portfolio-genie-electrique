@@ -1,0 +1,15 @@
+---
+import ComingSoon from '../../../components/ComingSoon.astro';
+import { getProjets } from '../../../lib/content';
+import { useTranslations } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const projets = await getProjets();
+  return projets.map((projet) => ({ params: { slug: projet.id } }));
+}
+
+const t = useTranslations('en');
+const { slug } = Astro.params;
+---
+
+<ComingSoon route="projets" slug={slug} pageTitle={t('nav.projets')} />

@@ -1,0 +1,37 @@
+---
+// Page EN en attente de traduction : renvoie vers la version française.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from './ButtonLink.astro';
+import { localePath, type RouteKey } from '../i18n/routes';
+import { ui, useTranslations } from '../i18n/ui';
+
+interface Props {
+  route: RouteKey;
+  slug?: string;
+  /** Nom de la page en anglais. */
+  pageTitle: string;
+}
+
+const { route, slug, pageTitle } = Astro.props;
+const t = useTranslations('en');
+---
+
+<BaseLayout lang="en" route={route} slug={slug} title={pageTitle} description={t('soon.body')}>
+  <div class="container-page py-16 sm:py-24">
+    <p class="eyebrow">{pageTitle}</p>
+    <h1 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{t('soon.title')}</h1>
+    <p class="mt-2 text-lg text-muted" lang="fr">{ui.fr['soon.title']}</p>
+    <p class="mt-6 max-w-xl text-text/90">{t('soon.body')}</p>
+    <div class="mt-8">
+      <ButtonLink
+        href={localePath('fr', route, slug)}
+        variant="primary"
+        icon="lucide:arrow-right"
+        hreflang="fr"
+        lang="fr"
+      >
+        {t('soon.cta')}
+      </ButtonLink>
+    </div>
+  </div>
+</BaseLayout>
