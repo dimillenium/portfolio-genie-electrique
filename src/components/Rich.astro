@@ -1,0 +1,12 @@
+---
+// Affiche un texte en mettant en évidence ses [PLACEHOLDERS].
+import { splitPlaceholders } from '../lib/placeholders.mjs';
+
+interface Props {
+  text: string;
+}
+
+const parts = splitPlaceholders(Astro.props.text);
+---
+
+{parts.map((part) => (part.placeholder ? <mark class="ph">{part.text}</mark> : part.text))}

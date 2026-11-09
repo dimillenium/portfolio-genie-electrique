@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+import Rich from './Rich.astro';
+import { getSingle, isUsableUrl } from '../lib/content';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { hasPlaceholder } from '../lib/placeholders.mjs';
+
+interface Props {
+  lang: Lang;
+  siteName: string;
+}
+
+const { lang, siteName } = Astro.props;
+const t = useTranslations(lang);
+const contact = await getSingle('contact');
+
+// Seuls les liens réellement remplis apparaissent dans le pied de page
+const links = [
+  { href: contact.github, label: t('contact.github'), icon: 'lucide:github' },
+  { href: contact.linkedin, label: t('contact.linkedin'), icon: 'lucide:linkedin' },
+  {
+    href: hasPlaceholder(contact.courriel) ? undefined : `mailto:${contact.courriel}`,
+    label: t('contact.email'),
+    icon: 'lucide:mail',
+  },
+].filter((l): l is { href: string; label: string; icon: string } => isUsableUrl(l.href));
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-line/70">
+  <div
+    class="container-page flex flex-col gap-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p>© {year} <Rich text={siteName} /></p>
+    {
+      links.length > 0 && (
+        <nav aria-label={t('footer.contact')}>
+          <ul class="-mx-2 flex gap-1" role="list">
+            {links.map((link) => (
+              <li>
+                <a href={link.href} class="inline-flex rounded p-2 hover:text-text">
+                  <Icon name={link.icon} class="size-5" aria-hidden="true" />
+                  <span class="sr-only">{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+  </div>
+</footer>

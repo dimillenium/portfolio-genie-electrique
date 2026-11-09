@@ -1,0 +1,87 @@
+---
+import { Icon } from 'astro-icon/components';
+import Rich from './Rich.astro';
+import { localePath, type RouteKey } from '../i18n/routes';
+import { otherLang, useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  route: RouteKey;
+  slug?: string;
+  siteName: string;
+}
+
+const { lang, route, slug, siteName } = Astro.props;
+const t = useTranslations(lang);
+
+const items: { key: RouteKey; label: string }[] = [
+  { key: 'projets', label: t('nav.projets') },
+  { key: 'parcours', label: t('nav.parcours') },
+  { key: 'competences', label: t('nav.competences') },
+  { key: 'contact', label: t('nav.contact') },
+];
+
+const alt = otherLang(lang);
+const altHref = localePath(alt, route === 'notfound' ? 'home' : route, slug);
+---
+
+<header class="border-b border-line/70">
+  <div class="container-page flex flex-wrap items-center gap-x-6 pt-1.5 sm:py-3">
+    <a
+      href={localePath(lang, 'home')}
+      class="mr-auto inline-flex items-center gap-2 py-2 font-mono text-sm font-medium tracking-tight no-underline hover:text-accent"
+      aria-current={route === 'home' ? 'page' : undefined}
+    >
+      <Icon name="trace" class="size-5 text-accent" aria-hidden="true" />
+      <span><Rich text={siteName} /></span>
+    </a>
+
+    <a
+      href={altHref}
+      hreflang={alt}
+      lang={alt}
+      class="order-2 -mr-2 rounded px-2 py-2 font-mono text-xs font-medium tracking-wider text-muted no-underline hover:text-text sm:order-3"
+    >
+      <span aria-hidden="true">{t('lang.short')}</span>
+      <span class="sr-only">{t('lang.short')} — {t('lang.long')}</span>
+    </a>
+
+    <nav aria-label={t('nav.label')} class="order-3 w-full sm:order-2 sm:w-auto">
+      <ul class="-mx-2 flex flex-wrap" role="list">
+        {
+          items.map((item) => {
+            const current = route === item.key;
+            return (
+              <li>
+                <a
+                  href={localePath(lang, item.key)}
+                  class="nav-link"
+                  aria-current={current ? (slug ? 'true' : 'page') : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-link {
+    display: inline-block;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+  .nav-link:hover {
+    color: var(--color-text);
+  }
+  .nav-link[aria-current] {
+    color: var(--color-text);
+    box-shadow: inset 0 -2px 0 var(--color-accent);
+  }
+</style>

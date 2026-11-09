@@ -1,9 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { satteri } from '@astrojs/markdown-satteri';
-import { DEFAULT_LOCALE, LOCALES } from './src/i18n/config.mjs';
+import { DEFAULT_LOCALE, EN_READY, LOCALES } from './src/i18n/config.mjs';
 import { placeholderHighlight } from './src/lib/satteri-placeholders.mjs';
 
 // GitHub Pages : site de projet servi sous https://<compte>.github.io/<repo>/
@@ -22,7 +23,13 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [icon()],
+  integrations: [
+    icon(),
+    sitemap({
+      // Exclut la 404 et, tant qu'elles ne sont pas traduites, les pages EN
+      filter: (page) => !page.includes('/404') && (EN_READY || !page.startsWith(`${SITE}${BASE}/en/`)),
+    }),
+  ],
   markdown: {
     processor: satteri({
       // Texte publié tel qu'écrit dans le Markdown (pas de guillemets « intelligents »)

@@ -1,17 +1,13 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Rich from '../components/Rich.astro';
+import { getSingle } from '../lib/content';
+
+const accueil = await getSingle('accueil');
 ---
 
-<!doctype html>
-<html lang="fr-CA">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portfolio</title>
-  </head>
-  <body>
-    <main class="container-page py-16">
-      <h1 class="text-3xl font-semibold">Squelette</h1>
-    </main>
-  </body>
-</html>
+<BaseLayout lang="fr" route="home" description={accueil.accroche}>
+  <div class="container-page py-12">
+    <h1 class="text-3xl font-semibold"><Rich text={accueil.titre} /></h1>
+  </div>
+</BaseLayout>
