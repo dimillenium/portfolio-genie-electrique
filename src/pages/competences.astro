@@ -1,0 +1,72 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Rich from '../components/Rich.astro';
+import { getSingle } from '../lib/content';
+import { useTranslations } from '../i18n/ui';
+import { hasPlaceholder } from '../lib/placeholders.mjs';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+const { groupes } = await getSingle('competences');
+
+const icons = {
+  pratique: 'lucide:badge-check',
+  apprentissage: 'lucide:book-open',
+  objectifs: 'lucide:target',
+} as const;
+
+const description = groupes
+  .map((g) => `${g.titre} : ${g.items.filter((i) => !hasPlaceholder(i)).join(', ')}`)
+  .join('. ');
+---
+
+<BaseLayout lang={lang} route="competences" title={t('nav.competences')} description={description}>
+  <div class="container-page py-10 sm:py-14">
+    <PageTitle title={t('nav.competences')} />
+
+    <div class="mt-10 grid gap-4 lg:grid-cols-3">
+      {
+        groupes.map((groupe) => (
+          <section aria-labelledby={`groupe-${groupe.id}`} class="groupe card p-5 sm:p-6" data-groupe={groupe.id}>
+            <h2 id={`groupe-${groupe.id}`} class="flex items-start gap-2.5 text-lg leading-snug font-semibold">
+              <Icon name={icons[groupe.id]} class="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+              <span>
+                {groupe.titre}
+                {groupe.precision && <span class="font-normal text-muted"> ({groupe.precision})</span>}
+              </span>
+            </h2>
+            <ul class="mt-5 flex flex-wrap gap-2" role="list">
+              {groupe.items.map((item) => (
+                <li class="skill">
+                  <Rich text={item} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .skill {
+    padding: 0.35rem 0.65rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface-2);
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+  .groupe[data-groupe='pratique'] .skill {
+    border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+  /* Objectifs : pas encore acquis, bordure pointillée */
+  .groupe[data-groupe='objectifs'] .skill {
+    border-style: dashed;
+    background: transparent;
+    color: var(--color-muted);
+  }
+</style>

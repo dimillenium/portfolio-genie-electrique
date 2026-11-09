@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import { getSingle } from '../lib/content';
+import { localePath } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+const accueil = await getSingle('accueil');
+---
+
+<BaseLayout lang={lang} route="notfound" title={t('notfound.title')} description={accueil.sousTitre} noindex>
+  <div class="container-page py-20">
+    <p class="font-mono text-sm text-accent">404</p>
+    <h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{t('notfound.title')}</h1>
+    <div class="mt-8">
+      <ButtonLink href={localePath(lang, 'home')} variant="primary" icon="lucide:arrow-left" iconFirst>
+        {t('notfound.back')}
+      </ButtonLink>
+    </div>
+  </div>
+</BaseLayout>

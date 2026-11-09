@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import Rich from './Rich.astro';
+import StatusBadge from './StatusBadge.astro';
+import { formatDate, type Projet } from '../lib/content';
+import { localePath } from '../i18n/routes';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  projet: Projet;
+  lang: Lang;
+  headingLevel?: 2 | 3;
+}
+
+const { projet, lang, headingLevel = 3 } = Astro.props;
+const { title, summary, status, startDate, technologies, cover, coverAlt } = projet.data;
+const t = useTranslations(lang);
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const href = localePath(lang, 'projets', projet.id);
+---
+
+<article class="card flex h-full flex-col overflow-hidden">
+  {
+    cover && (
+      <Image
+        src={cover}
+        alt={coverAlt ?? ''}
+        widths={[400, 800]}
+        sizes="(min-width: 48rem) 50vw, 100vw"
+        loading="lazy"
+        decoding="async"
+        class="aspect-video w-full border-b border-line object-cover"
+      />
+    )
+  }
+  <div class="flex flex-1 flex-col p-5">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <StatusBadge status={status} lang={lang} />
+      <span class="font-mono text-xs text-muted">
+        <span class="sr-only">{t('project.start')} :</span>
+        {
+          startDate instanceof Date ? (
+            <time datetime={startDate.toISOString().slice(0, 10)}>{formatDate(startDate, lang)}</time>
+          ) : (
+            <Rich text={startDate} />
+          )
+        }
+      </span>
+    </div>
+    <Heading class="mt-4 text-lg leading-snug font-semibold">
+      <a href={href} class="stretched hover:text-accent-strong">{title}</a>
+    </Heading>
+    <p class="mt-2 text-sm text-muted">{summary}</p>
+    {
+      technologies.length > 0 && (
+        <ul class="mt-auto flex flex-wrap gap-1.5 pt-5" aria-label={t('project.technologies')} role="list">
+          {technologies.map((tech) => (
+            <li class="chip">{tech}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

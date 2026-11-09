@@ -1,13 +1,87 @@
 ---
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import Rich from '../components/Rich.astro';
-import { getSingle } from '../lib/content';
+import { getProjets, getSingle } from '../lib/content';
+import { localePath } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
 
+const lang = 'fr';
+const t = useTranslations(lang);
 const accueil = await getSingle('accueil');
+const featured = (await getProjets()).filter((p) => p.data.featured);
+const { boutons } = accueil;
 ---
 
-<BaseLayout lang="fr" route="home" description={accueil.accroche}>
-  <div class="container-page py-12">
-    <h1 class="text-3xl font-semibold"><Rich text={accueil.titre} /></h1>
+<BaseLayout lang={lang} route="home" description={`${accueil.sousTitre}. ${accueil.accroche}`}>
+  <!-- Écran d'accueil : qui je suis, ce que je construis, où voir la preuve -->
+  <section aria-labelledby="hero-title" class="container-page pt-6 pb-12 sm:pt-16 sm:pb-16">
+    <h1 id="hero-title" class="text-[2rem] leading-tight font-semibold tracking-tight sm:text-5xl">
+      <Rich text={accueil.titre} />
+    </h1>
+    <p class="mt-2 text-lg leading-snug font-medium text-accent sm:mt-3 sm:text-2xl">
+      {accueil.sousTitre}
+    </p>
+    <p class="mt-4 max-w-2xl text-[0.97rem] leading-relaxed text-text/90 sm:mt-6 sm:text-lg">
+      {accueil.accroche}
+    </p>
+    <div class="mt-6 flex flex-wrap gap-3 sm:mt-8">
+      <ButtonLink href={localePath(lang, 'projets')} variant="primary" icon="lucide:arrow-right">
+        {boutons.projets}
+      </ButtonLink>
+      <ButtonLink href={localePath(lang, 'parcours')}>{boutons.parcours}</ButtonLink>
+      <ButtonLink href={localePath(lang, 'contact')}>{boutons.contact}</ButtonLink>
+    </div>
+  </section>
+
+  <section aria-labelledby="preuves-title" class="container-page">
+    <h2 id="preuves-title" class="sr-only">{t('home.proofs')}</h2>
+    <ul class="grid gap-4 md:grid-cols-3" role="list">
+      {
+        accueil.preuves.map((preuve) => (
+          <li class="card p-5">
+            <Icon name={preuve.icone} class="size-6 text-accent" aria-hidden="true" />
+            <h3 class="mt-3 font-semibold">
+              {preuve.lien ? (
+                <a href={localePath(lang, preuve.lien)} class="stretched hover:text-accent-strong">
+                  {preuve.titre}
+                </a>
+              ) : (
+                preuve.titre
+              )}
+            </h3>
+            <p class="mt-1.5 text-sm text-muted">
+              <Rich text={preuve.texte} />
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section aria-labelledby="vedette-title" class="container-page mt-16">
+        <h2 id="vedette-title" class="text-2xl font-semibold tracking-tight">
+          {t('home.featured')}
+        </h2>
+        <ul class="mt-6 grid gap-4 md:grid-cols-2" role="list">
+          {featured.map((projet) => (
+            <li>
+              <ProjectCard projet={projet} lang={lang} headingLevel={3} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <div class="container-page mt-12 flex flex-wrap gap-3">
+    <ButtonLink href={localePath(lang, 'projets')} icon="lucide:arrow-right">{boutons.projets}</ButtonLink>
+    <ButtonLink href={localePath(lang, 'contact')} variant="primary" icon="lucide:mail" iconFirst>
+      {boutons.contact}
+    </ButtonLink>
   </div>
 </BaseLayout>

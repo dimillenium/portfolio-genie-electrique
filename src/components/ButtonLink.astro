@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  icon?: string;
+  /** Icône avant le texte plutôt qu'après. */
+  iconFirst?: boolean;
+  download?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'secondary', icon, iconFirst = false, download, class: className } = Astro.props;
+---
+
+<a href={href} class:list={['btn', `btn-${variant}`, className]} download={download}>
+  {icon && iconFirst && <Icon name={icon} class="size-4.5 shrink-0" aria-hidden="true" />}
+  <slot />
+  {icon && !iconFirst && <Icon name={icon} class="size-4.5 shrink-0" aria-hidden="true" />}
+</a>

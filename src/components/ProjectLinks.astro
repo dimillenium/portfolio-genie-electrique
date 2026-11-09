@@ -1,0 +1,49 @@
+---
+// Boutons Repo / Démo / Vidéo. Un lien qui contient encore un [PLACEHOLDER]
+// est affiché désactivé (pas de lien mort).
+import { Icon } from 'astro-icon/components';
+import ButtonLink from './ButtonLink.astro';
+import Rich from './Rich.astro';
+import { isUsableUrl, type Projet } from '../lib/content';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  projet: Projet;
+  lang: Lang;
+}
+
+const { projet, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const links = [
+  { url: projet.data.repoUrl, label: t('project.repo'), icon: 'lucide:github', primary: true },
+  { url: projet.data.demoUrl, label: t('project.demo'), icon: 'lucide:play', primary: false },
+  { url: projet.data.videoUrl, label: t('project.video'), icon: 'lucide:video', primary: false },
+].filter((l): l is typeof l & { url: string } => !!l.url);
+
+const display = (url: string) => url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+---
+
+{
+  links.length > 0 && (
+    <ul class="flex flex-wrap gap-3" aria-label={t('project.links')} role="list">
+      {links.map((link) => (
+        <li>
+          {isUsableUrl(link.url) ? (
+            <ButtonLink href={link.url} variant={link.primary ? 'primary' : 'secondary'} icon={link.icon} iconFirst>
+              {link.label}
+            </ButtonLink>
+          ) : (
+            <a role="link" aria-disabled="true" class="btn btn-disabled">
+              <Icon name={link.icon} class="size-4.5 shrink-0" aria-hidden="true" />
+              {link.label}
+              <span class="text-xs break-all">
+                <Rich text={display(link.url)} />
+              </span>
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

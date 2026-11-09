@@ -1,0 +1,101 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Rich from '../components/Rich.astro';
+import { getSingle, isUsableUrl } from '../lib/content';
+import { withBase } from '../lib/paths';
+import { useTranslations } from '../i18n/ui';
+import { hasPlaceholder } from '../lib/placeholders.mjs';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+const accueil = await getSingle('accueil');
+const contact = await getSingle('contact');
+
+// Le CV est activé dès que public/cv/cv.pdf existe au moment du build
+const CV_PATH = 'cv/cv.pdf';
+const cvAvailable = existsSync(join(process.cwd(), 'public', CV_PATH));
+
+const display = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+const items = [
+  {
+    label: t('contact.email'),
+    icon: 'lucide:mail',
+    value: contact.courriel,
+    href: hasPlaceholder(contact.courriel) ? undefined : `mailto:${contact.courriel}`,
+  },
+  {
+    label: t('contact.linkedin'),
+    icon: 'lucide:linkedin',
+    value: isUsableUrl(contact.linkedin) ? display(contact.linkedin) : contact.linkedin,
+    href: isUsableUrl(contact.linkedin) ? contact.linkedin : undefined,
+  },
+  {
+    label: t('contact.github'),
+    icon: 'lucide:github',
+    value: isUsableUrl(contact.github) ? display(contact.github) : contact.github,
+    href: isUsableUrl(contact.github) ? contact.github : undefined,
+  },
+];
+---
+
+<BaseLayout lang={lang} route="contact" title={t('nav.contact')} description={accueil.sousTitre}>
+  <div class="container-page py-10 sm:py-14">
+    <PageTitle title={t('nav.contact')} />
+
+    <ul class="mt-10 grid max-w-3xl gap-3 sm:grid-cols-2" role="list">
+      {
+        items.map((item) => (
+          <li class="card flex items-center gap-4 p-4 sm:p-5">
+            <Icon name={item.icon} class="size-6 shrink-0 text-accent" aria-hidden="true" />
+            <div class="min-w-0">
+              <p class="text-sm text-muted">{item.label}</p>
+              {item.href ? (
+                <a href={item.href} class="stretched font-medium break-words hover:text-accent-strong">
+                  {item.value}
+                </a>
+              ) : (
+                <p class="font-medium">
+                  <Rich text={item.value} />
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+      <li class="card flex items-center gap-4 p-4 sm:p-5">
+        <Icon name="lucide:file-text" class="size-6 shrink-0 text-accent" aria-hidden="true" />
+        <div class="min-w-0">
+          <p class="text-sm text-muted">{t('contact.cv')}</p>
+          {
+            cvAvailable ? (
+              <a href={withBase(CV_PATH)} class="stretched font-medium hover:text-accent-strong" type="application/pdf">
+                {t('contact.cv.download')}
+              </a>
+            ) : (
+              <a role="link" aria-disabled="true" class="font-medium text-muted">
+                <span class="sr-only">{t('contact.cv.missing')}</span>
+                <Rich text={contact.cv} />
+              </a>
+            )
+          }
+        </div>
+      </li>
+    </ul>
+
+    {
+      cvAvailable && (
+        <div class="mt-8">
+          <ButtonLink href={withBase(CV_PATH)} variant="primary" icon="lucide:file-down" iconFirst>
+            {t('contact.cv.download')}
+          </ButtonLink>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

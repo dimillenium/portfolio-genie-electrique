@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageTitle from '../../components/PageTitle.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { PROJECT_STATUSES } from '../../content.config';
+import { getProjets, getSingle } from '../../lib/content';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+const accueil = await getSingle('accueil');
+const projets = await getProjets();
+
+const counts = Object.fromEntries(
+  PROJECT_STATUSES.map((s) => [s, projets.filter((p) => p.data.status === s).length]),
+) as Record<(typeof PROJECT_STATUSES)[number], number>;
+
+const filters = [
+  { value: 'tous', label: t('projects.filter.all'), count: projets.length },
+  ...PROJECT_STATUSES.map((s) => ({ value: s, label: t(`status.${s}`), count: counts[s] })),
+];
+
+const description = `${accueil.sousTitre}. ${projets.map((p) => p.data.title).join(' · ')}`;
+---
+
+<BaseLayout lang={lang} route="projets" title={t('nav.projets')} description={description}>
+  <div class="container-page py-10 sm:py-14">
+    <PageTitle title={t('nav.projets')} />
+
+    <!-- Filtre sans JavaScript : boutons radio + CSS :has() -->
+    <div class="filterable mt-8">
+      <fieldset>
+        <legend class="mb-3 text-sm text-muted">{t('projects.filter.legend')}</legend>
+        <div class="flex flex-wrap gap-2">
+          {
+            filters.map((f) => (
+              <label class="filter">
+                <input type="radio" name="statut" value={f.value} checked={f.value === 'tous'} class="sr-only" />
+                <span>{f.label}</span>
+                <span class="filter-count" aria-hidden="true">
+                  {f.count}
+                </span>
+                <span class="sr-only">({f.count})</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <ul class="mt-6 grid gap-4 md:grid-cols-2" role="list">
+        {
+          projets.map((projet) => (
+            <li data-status={projet.data.status}>
+              <ProjectCard projet={projet} lang={lang} headingLevel={2} />
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        PROJECT_STATUSES.filter((s) => counts[s] === 0).map((s) => (
+          <p class="empty mt-2 rounded-lg border border-dashed border-line p-6 text-sm text-muted" data-empty-for={s}>
+            {t('projects.empty')}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    user-select: none;
+    transition:
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+  .filter:hover {
+    color: var(--color-text);
+  }
+  .filter:has(input:checked) {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .filter:has(input:focus-visible) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .filter-count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .empty {
+    display: none;
+  }
+
+  .filterable:has(input[value='planifie']:checked) li[data-status]:not([data-status='planifie']),
+  .filterable:has(input[value='en-cours']:checked) li[data-status]:not([data-status='en-cours']),
+  .filterable:has(input[value='termine']:checked) li[data-status]:not([data-status='termine']) {
+    display: none;
+  }
+
+  .filterable:has(input[value='planifie']:checked) .empty[data-empty-for='planifie'],
+  .filterable:has(input[value='en-cours']:checked) .empty[data-empty-for='en-cours'],
+  .filterable:has(input[value='termine']:checked) .empty[data-empty-for='termine'] {
+    display: block;
+  }
+</style>

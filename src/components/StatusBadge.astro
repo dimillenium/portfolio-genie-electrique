@@ -1,0 +1,25 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { ProjectStatus } from '../content.config';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  status: ProjectStatus;
+  lang: Lang;
+}
+
+const { status, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const icons: Record<ProjectStatus, string> = {
+  planifie: 'lucide:circle-dashed',
+  'en-cours': 'lucide:circle-dot',
+  termine: 'lucide:circle-check',
+};
+---
+
+<span class="badge" data-status={status}>
+  <Icon name={icons[status]} class="size-3.5" aria-hidden="true" />
+  <span class="sr-only">{t('project.status')} :</span>
+  {t(`status.${status}`)}
+</span>
