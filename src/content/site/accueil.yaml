@@ -1,0 +1,26 @@
+# Page d'accueil. Source : CONTENU.md, partie 2 « Accueil ».
+# Les [CROCHETS] sont des placeholders : ils restent visibles sur le site tant qu'ils ne sont pas remplis.
+
+titre: "[PRÉNOM NOM]"
+sousTitre: "Technicien IT en transition vers l'automatisation industrielle"
+accroche: "J'automatise des processus au travail (Power Automate, Jura Workflow, tests unitaires, pipelines CI/CD). Je construis maintenant des systèmes de monitoring, des PLC simulés et des tableaux SCADA, avec l'objectif de devenir ingénieur en automatisation industrielle, puis de travailler sur les mines autonomes."
+
+# 3 blocs de preuves. icone : nom Lucide (https://lucide.dev/icons). lien : page vers laquelle pointe le bloc.
+preuves:
+  - titre: "Automatisation au quotidien"
+    texte: "Workflows, tests unitaires et CI/CD en contexte professionnel. [AJOUTE UN CHIFFRE RÉEL : nombre de workflows, temps économisé, etc.]"
+    icone: "lucide:workflow"
+    lien: competences
+  - titre: "Projets publics sur GitHub"
+    texte: "Chaque projet a son repo, son schéma, sa démo et son README."
+    icone: "lucide:folder-git-2"
+    lien: projets
+  - titre: "Formation en cours"
+    texte: "Automates programmables Allen-Bradley (Cégep de Lévis) et préparation au baccalauréat en génie électrique."
+    icone: "lucide:graduation-cap"
+    lien: parcours
+
+boutons:
+  projets: "Voir les projets"
+  parcours: "Mon parcours"
+  contact: "Me contacter"

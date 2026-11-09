@@ -1,0 +1,10 @@
+# Contact. Source : CONTENU.md, partie 2 « Contact ».
+# courriel : adresse complète (ex. prenom@domaine.ca). linkedin / github : URL complètes (https://…).
+
+courriel: "[TON COURRIEL]"
+linkedin: "[URL]"
+github: "[URL]"
+
+# CV : dépose le fichier dans public/cv/cv.pdf. Le bouton s'active tout seul au prochain build.
+# Ce texte est affiché tant que le fichier est absent.
+cv: "[PDF À AJOUTER]"

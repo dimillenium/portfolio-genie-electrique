@@ -1,0 +1,33 @@
+# Compétences. Source : CONTENU.md, partie 2 « Compétences ».
+# Règle : une compétence passe dans « Pratiqué » seulement quand un projet public le prouve.
+# Les objectifs sont affichés comme tels : aucune certification présentée comme obtenue.
+
+groupes:
+  - id: pratique
+    titre: "Pratiqué au travail"
+    items:
+      - "Power Automate"
+      - "Jura Workflow"
+      - "Tests unitaires"
+      - "CI/CD"
+      - "[LANGAGE(S) UTILISÉ(S) POUR TES TESTS]"
+      - "Git"
+
+  - id: apprentissage
+    titre: "En apprentissage"
+    precision: "projets personnels"
+    items:
+      - "Arduino"
+      - "Python (acquisition de données)"
+      - "n8n"
+      - "Ladder Logic (CODESYS)"
+      - "Allen-Bradley (cours)"
+
+  - id: objectifs
+    titre: "Objectifs"
+    items:
+      - "Node-RED / Ignition SCADA"
+      - "InfluxDB + Grafana"
+      - "CompTIA SecOT+"
+      - "Certification Rockwell"
+      - "PMP"

@@ -1,0 +1,30 @@
+# Timeline du parcours. Source : CONTENU.md, partie 2 « Parcours ».
+# Ordre d'affichage = ordre de la liste (du plus ancien aux objectifs).
+# etat : termine | en-cours | objectif (sert uniquement au style du jalon).
+# À ne pas écrire sur le site : statut d'immigration ni aucun détail personnel non pertinent.
+
+etapes:
+  - periode: "[ANNÉES]"
+    titre: "DEC en techniques de l'informatique, Cégep Garneau"
+    description: "Base en programmation, réseaux et systèmes."
+    etat: termine
+
+  - periode: "[DATE] → présent"
+    titre: "Technicien informatique N1/N2, AGA Assurances"
+    description: "Support TI, administration Jura. Automatisation avec Power Automate et Jura Workflow, tests unitaires, CI/CD."
+    etat: en-cours
+
+  - periode: "En cours"
+    titre: "Automates programmables, Cégep de Lévis"
+    description: "Formation continue Allen-Bradley, niveau 1 puis suivants. [METS LA DATE DE DÉBUT RÉELLE]"
+    etat: en-cours
+
+  - periode: "Objectif"
+    titre: "Baccalauréat en génie électrique"
+    description: "Option automatisme et commande industrielle. À temps partiel, en parallèle de l'emploi. [Mets « Planifié » sans date précise.]"
+    etat: objectif
+
+  - periode: "Objectif"
+    titre: "Maîtrise en génie minier"
+    description: "Après quelques années d'expérience terrain."
+    etat: objectif
