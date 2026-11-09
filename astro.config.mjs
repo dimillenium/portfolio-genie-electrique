@@ -2,7 +2,9 @@
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
+import { satteri } from '@astrojs/markdown-satteri';
 import { DEFAULT_LOCALE, LOCALES } from './src/i18n/config.mjs';
+import { placeholderHighlight } from './src/lib/satteri-placeholders.mjs';
 
 // GitHub Pages : site de projet servi sous https://<compte>.github.io/<repo>/
 const SITE = 'https://dimillenium.github.io';
@@ -21,6 +23,13 @@ export default defineConfig({
     },
   },
   integrations: [icon()],
+  markdown: {
+    processor: satteri({
+      // Texte publié tel qu'écrit dans le Markdown (pas de guillemets « intelligents »)
+      features: { smartPunctuation: false },
+      hastPlugins: [placeholderHighlight],
+    }),
+  },
   vite: {
     plugins: [tailwindcss()],
   },
