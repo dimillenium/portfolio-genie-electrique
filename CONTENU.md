@@ -69,7 +69,7 @@ MÉTHODE
 
 ### Accueil
 
-**Titre :** [PRÉNOM NOM]
+**Titre :** Dimitri Fondjo
 **Sous-titre :** Technicien IT en transition vers l'automatisation industrielle
 
 **Accroche :**
@@ -159,7 +159,7 @@ CV : [PDF À AJOUTER]
 ### Profil README GitHub (repo `[TON-COMPTE]/[TON-COMPTE]`)
 
 ```markdown
-# [PRÉNOM NOM]
+# Dimitri Fondjo
 Technicien IT en transition vers l'automatisation industrielle.
 
 - J'automatise des processus au travail (Power Automate, Jura Workflow, CI/CD)

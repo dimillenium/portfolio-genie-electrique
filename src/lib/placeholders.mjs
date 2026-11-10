@@ -1,4 +1,4 @@
-// Placeholders : tout texte entre crochets, ex. [PRÉNOM NOM] ou [URL].
+// Placeholders : tout texte entre crochets, ex. [URL] ou [TON COURRIEL].
 // Ils restent visibles sur le site tant qu'ils ne sont pas remplis.
 // Module .mjs pour être partagé par astro.config.mjs, le schéma et les scripts.
 

@@ -35,7 +35,7 @@ Le schéma est validé au build (`src/content.config.ts`). Une erreur indique le
 
 ### Placeholders
 
-Un texte entre crochets, par exemple `[PRÉNOM NOM]`, est un placeholder. Il s'affiche en pointillés cuivre sur le site pour qu'on ne l'oublie pas. `npm run placeholders` les liste tous ; `npm run placeholders -- --strict` échoue s'il en reste.
+Un texte entre crochets, par exemple `[URL]`, est un placeholder. Il s'affiche en pointillés cuivre sur le site pour qu'on ne l'oublie pas. `npm run placeholders` les liste tous ; `npm run placeholders -- --strict` échoue s'il en reste.
 
 ### Ajouter un projet
 

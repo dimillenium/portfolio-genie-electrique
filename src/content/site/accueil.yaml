@@ -1,7 +1,7 @@
 # Page d'accueil. Source : CONTENU.md, partie 2 « Accueil ».
 # Les [CROCHETS] sont des placeholders : ils restent visibles sur le site tant qu'ils ne sont pas remplis.
 
-titre: "[PRÉNOM NOM]"
+titre: "Dimitri Fondjo"
 sousTitre: "Technicien IT en transition vers l'automatisation industrielle"
 accroche: "J'automatise des processus au travail (Power Automate, Jura Workflow, tests unitaires, pipelines CI/CD). Je construis maintenant des systèmes de monitoring, des PLC simulés et des tableaux SCADA, avec l'objectif de devenir ingénieur en automatisation industrielle, puis de travailler sur les mines autonomes."
 
