@@ -73,7 +73,7 @@ MÉTHODE
 **Sous-titre :** Technicien IT en transition vers l'automatisation industrielle
 
 **Accroche :**
-J'automatise des processus au travail (Power Automate, Jura Workflow, tests unitaires, pipelines CI/CD). Je construis maintenant des systèmes de monitoring, des PLC simulés et des tableaux SCADA, avec l'objectif de devenir ingénieur en automatisation industrielle, puis de travailler sur les mines autonomes.
+J'automatise des processus au travail (Power Automate, Jira Workflow, tests unitaires, pipelines CI/CD). Je construis maintenant des systèmes de monitoring, des PLC simulés et des tableaux SCADA, avec l'objectif de devenir ingénieur en automatisation industrielle, puis de travailler sur les mines autonomes.
 
 **3 blocs de preuves**
 1. **Automatisation au quotidien** — Workflows, tests unitaires et CI/CD en contexte professionnel. [AJOUTE UN CHIFFRE RÉEL : nombre de workflows, temps économisé, etc.]
@@ -87,7 +87,7 @@ J'automatise des processus au travail (Power Automate, Jura Workflow, tests unit
 | Période | Titre | Description |
 |---|---|---|
 | [ANNÉES] | DEC en techniques de l'informatique, Cégep Garneau | Base en programmation, réseaux et systèmes. |
-| [DATE] → présent | Technicien informatique N1/N2, AGA Assurances | Support TI, administration Jura. Automatisation avec Power Automate et Jura Workflow, tests unitaires, CI/CD. |
+| [DATE] → présent | Technicien informatique N1/N2, AGA Assurances | Support TI, administration Jura. Automatisation avec Power Automate et Jira Workflow, tests unitaires, CI/CD. |
 | En cours | Automates programmables, Cégep de Lévis | Formation continue Allen-Bradley, niveau 1 puis suivants. [METS LA DATE DE DÉBUT RÉELLE] |
 | Objectif | Baccalauréat en génie électrique | Option automatisme et commande industrielle. À temps partiel, en parallèle de l'emploi. [Mets « Planifié » sans date précise.] |
 | Objectif | Maîtrise en génie minier | Après quelques années d'expérience terrain. |
@@ -97,7 +97,7 @@ J'automatise des processus au travail (Power Automate, Jura Workflow, tests unit
 ### Compétences
 
 **Pratiqué au travail**
-Power Automate · Jura Workflow · Tests unitaires · CI/CD · [LANGAGE(S) UTILISÉ(S) POUR TES TESTS] · Git
+Power Automate · Jira Workflow · Tests unitaires · CI/CD · [LANGAGE(S) UTILISÉ(S) POUR TES TESTS] · Git
 
 **En apprentissage (projets personnels)**
 Arduino · Python (acquisition de données) · n8n · Ladder Logic (CODESYS) · Allen-Bradley (cours)
@@ -162,7 +162,7 @@ CV : [PDF À AJOUTER]
 # Dimitri Fondjo
 Technicien IT en transition vers l'automatisation industrielle.
 
-- J'automatise des processus au travail (Power Automate, Jura Workflow, CI/CD)
+- J'automatise des processus au travail (Power Automate, Jira Workflow, CI/CD)
 - Je construis des projets de monitoring et de contrôle : Arduino, Python, n8n
 - Formation en cours : automates programmables Allen-Bradley
 - Objectif : génie électrique, puis mines autonomes

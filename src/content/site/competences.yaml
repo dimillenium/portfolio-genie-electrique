@@ -7,7 +7,7 @@ groupes:
     titre: "Pratiqué au travail"
     items:
       - "Power Automate"
-      - "Jura Workflow"
+      - "Jira Workflow"
       - "Tests unitaires"
       - "CI/CD"
       - "[LANGAGE(S) UTILISÉ(S) POUR TES TESTS]"

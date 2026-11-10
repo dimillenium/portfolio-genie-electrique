@@ -11,7 +11,7 @@ etapes:
 
   - periode: "[DATE] → présent"
     titre: "Technicien informatique N1/N2, AGA Assurances"
-    description: "Support TI, administration Jura. Automatisation avec Power Automate et Jura Workflow, tests unitaires, CI/CD."
+    description: "Support TI, administration Jura. Automatisation avec Power Automate et Jira Workflow, tests unitaires, CI/CD."
     etat: en-cours
 
   - periode: "En cours"
