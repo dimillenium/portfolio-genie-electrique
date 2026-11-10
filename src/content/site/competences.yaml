@@ -13,6 +13,21 @@ groupes:
       - "[LANGAGE(S) UTILISÉ(S) POUR TES TESTS]"
       - "Git"
 
+  - id: ecole
+    titre: "Appris à l'école"
+    precision: "pratiqué sur des projets perso"
+    items:
+      - "Python (Flask et Django)"
+      - "C#"
+      - "JavaScript"
+      - "TypeScript"
+      - "MongoDB"
+      - "MySQL"
+      - "Oracle"
+      - "Tailwind CSS"
+      - "Bootstrap"
+      - "Next.js"
+
   - id: apprentissage
     titre: "En apprentissage"
     precision: "projets personnels"

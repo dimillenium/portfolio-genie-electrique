@@ -120,13 +120,13 @@ const competences = defineCollection({
     groupes: z
       .array(
         z.object({
-          id: z.enum(['pratique', 'apprentissage', 'objectifs']),
+          id: z.enum(['pratique', 'ecole', 'apprentissage', 'objectifs']),
           titre: z.string().min(1),
           precision: z.string().min(1).optional(),
           items: z.array(z.string().min(1)).min(1),
         }),
       )
-      .length(3),
+      .min(1),
   }),
 });
 

@@ -99,6 +99,9 @@ J'automatise des processus au travail (Power Automate, Jira Workflow, tests unit
 **Pratiqué au travail**
 Power Automate · Jira Workflow · Tests unitaires · CI/CD · [LANGAGE(S) UTILISÉ(S) POUR TES TESTS] · Git
 
+**Appris à l'école (pratiqué sur des projets perso)**
+Python (Flask et Django) · C# · JavaScript · TypeScript · MongoDB · MySQL · Oracle · Tailwind CSS · Bootstrap · Next.js
+
 **En apprentissage (projets personnels)**
 Arduino · Python (acquisition de données) · n8n · Ladder Logic (CODESYS) · Allen-Bradley (cours)
 

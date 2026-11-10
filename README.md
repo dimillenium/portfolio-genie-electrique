@@ -27,7 +27,7 @@ Tout le texte est dans `src/content/`. Le code n'a pas à être modifié.
 |---|---|
 | `src/content/site/accueil.yaml` | Accueil : nom, sous-titre, accroche, 3 blocs de preuves, boutons |
 | `src/content/site/parcours.yaml` | Parcours (timeline) |
-| `src/content/site/competences.yaml` | Compétences (3 groupes) |
+| `src/content/site/competences.yaml` | Compétences (4 groupes) |
 | `src/content/site/contact.yaml` | Contact : courriel, LinkedIn, GitHub |
 | `src/content/projets/*.md` | Un fichier par projet |
 

@@ -13,6 +13,7 @@ const { groupes } = await getSingle('competences');
 
 const icons = {
   pratique: 'lucide:badge-check',
+  ecole: 'lucide:code',
   apprentissage: 'lucide:book-open',
   objectifs: 'lucide:target',
 } as const;
@@ -26,7 +27,7 @@ const description = groupes
   <div class="container-page py-10 sm:py-14">
     <PageTitle title={t('nav.competences')} />
 
-    <div class="mt-10 grid gap-4 lg:grid-cols-3">
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
       {
         groupes.map((groupe) => (
           <section aria-labelledby={`groupe-${groupe.id}`} class="groupe card p-5 sm:p-6" data-groupe={groupe.id}>
