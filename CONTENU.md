@@ -87,7 +87,7 @@ J'automatise des processus au travail (Power Automate, Jira Workflow, tests unit
 | Période | Titre | Description |
 |---|---|---|
 | [ANNÉES] | DEC en techniques de l'informatique, Cégep Garneau | Base en programmation, réseaux et systèmes. |
-| [DATE] → présent | Technicien informatique N1/N2, AGA Assurances | Support TI, administration Jura. Automatisation avec Power Automate et Jira Workflow, tests unitaires, CI/CD. |
+| [DATE] → présent | Technicien informatique N1/N2, AGA Assurances | Support TI, administration Jira. Automatisation avec Power Automate et Jira Workflow, tests unitaires, CI/CD. |
 | En cours | Automates programmables, Cégep de Lévis | Formation continue Allen-Bradley, niveau 1 puis suivants. [METS LA DATE DE DÉBUT RÉELLE] |
 | Objectif | Baccalauréat en génie électrique | Option automatisme et commande industrielle. À temps partiel, en parallèle de l'emploi. [Mets « Planifié » sans date précise.] |
 | Objectif | Maîtrise en génie minier | Après quelques années d'expérience terrain. |
