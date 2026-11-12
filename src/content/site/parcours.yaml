@@ -4,12 +4,12 @@
 # À ne pas écrire sur le site : statut d'immigration ni aucun détail personnel non pertinent.
 
 etapes:
-  - periode: "[ANNÉES]"
+  - periode: "2022 – 2025"
     titre: "DEC en techniques de l'informatique, Cégep Garneau"
     description: "Base en programmation, réseaux et systèmes."
     etat: termine
 
-  - periode: "[DATE] → présent"
+  - periode: "2026 – aujourd'hui"
     titre: "Technicien informatique N1/N2, AGA Assurances"
     description: "Support TI, administration Jira. Automatisation avec Power Automate et Jira Workflow, tests unitaires, CI/CD."
     etat: en-cours
