@@ -10,7 +10,6 @@ groupes:
       - "Jira Workflow"
       - "Tests unitaires"
       - "CI/CD"
-      - "[LANGAGE(S) UTILISÉ(S) POUR TES TESTS]"
       - "Git"
 
   - id: ecole
